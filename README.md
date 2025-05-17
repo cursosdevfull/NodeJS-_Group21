@@ -17,6 +17,27 @@ cd NodeJS-_Group21
 
 No external dependencies are required as the project only uses built-in Node.js modules.
 
+### SSL Certificate Generation
+
+Before running the server, you need to generate SSL certificates for HTTPS support:
+
+1. Create a certificates directory if it doesn't exist:
+```bash
+mkdir -p certificates
+```
+
+2. Generate a private key:
+```bash
+openssl genrsa -out certificates/curso-nodejs21.pem 2048
+```
+
+3. Create a self-signed certificate:
+```bash
+openssl req -new -x509 -key certificates/curso-nodejs21.pem -out certificates/curso-nodejs21.cert -days 365
+```
+
+When prompted during certificate creation, you can provide your information or use default values.
+
 ## Usage
 
 Start the server:
@@ -25,7 +46,7 @@ Start the server:
 node index.js
 ```
 
-The server will run on port 3000. You can access the following endpoints:
+The server will run on port 443 with HTTPS support. You can access the following endpoints:
 
 ## API Endpoints
 
@@ -52,6 +73,9 @@ NodeJS-_Group21/
 ├── README.md              # Project documentation
 ├── request.http           # HTTP requests for testing
 ├── .gitignore             # Git ignore configuration
+├── certificates/          # SSL certificates for HTTPS
+│   ├── curso-nodejs21.pem     # Private key
+│   └── curso-nodejs21.cert    # Self-signed certificate
 └── modules/               # Application modules
     ├── core/              # Core functionality
     │   └── errors/        
