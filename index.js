@@ -1,10 +1,6 @@
 const http = require("http")
+const {handler} = require("./app")
 
-const server = http.createServer((request, response) => {
-    response.writeHead(200, {"content-type": "text/plain"})
-    response.write("Hola")
-    response.write("Este es el curso de NodeJs")
-    response.end()
-})
+const server = http.createServer(handler)
 
 server.listen(3000, () => console.log("Server is running"))

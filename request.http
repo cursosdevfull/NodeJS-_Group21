@@ -1,0 +1,8 @@
+### Get users
+get http://localhost:3000/user
+
+### Get user detail
+get http://localhost:3000/user/detail
+
+### Insert user
+post http://localhost:3000/user
