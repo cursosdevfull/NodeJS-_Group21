@@ -1,0 +1,27 @@
+{
+  "name": "nodejs-_group21",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.js",
+  "scripts": {
+    "clean": "rimraf dist",
+    "build:dev": "npm run clean & tsc",
+    "build": "npm run clean & tsc -p tsconfig.prod.json"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/cursosdevfull/NodeJS-_Group21.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "type": "commonjs",
+  "bugs": {
+    "url": "https://github.com/cursosdevfull/NodeJS-_Group21/issues"
+  },
+  "homepage": "https://github.com/cursosdevfull/NodeJS-_Group21#readme",
+  "devDependencies": {
+    "rimraf": "^6.0.1",
+    "typescript": "^5.8.3"
+  }
+}
