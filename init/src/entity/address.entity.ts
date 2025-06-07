@@ -18,4 +18,10 @@ export class AddressEntity {
     @ManyToOne(() => StudentEntity, (student) => student.addresses)
     @JoinColumn({ name: "studentId" })
     student: StudentEntity; // Assuming StudentEntity is defined elsewhere
+
+    constructor(street: string, city: string, state: string) {
+        this.street = street;
+        this.city = city;
+        this.state = state;
+    }
 }

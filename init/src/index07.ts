@@ -21,7 +21,7 @@ AppDataSource.initialize()
     newUser.lastname = "Doe";
     newUser.email = "john.doe@email.com";
     newUser.age = 30;
-    newUser.role = roleSaved; // Assign the saved role to the user
+    newUser.roles = [roleSaved]; // Assign the saved role to the user
 
     const userSaved = await userRepository.save(newUser);
 

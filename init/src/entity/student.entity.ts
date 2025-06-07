@@ -1,5 +1,6 @@
-import { Column, Entity, Index, OneToMany, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
+import { Column, Entity, Index, OneToMany, OneToOne, PrimaryColumn, PrimaryGeneratedColumn } from "typeorm";
 import { AddressEntity } from "./address.entity";
+import { StudentAdditionalEntity } from "./student-additional.entity";
 
 @Entity({ name: "student" })
 @Index("idx_lastname_email", ["lastName", "email"], { unique: true })
@@ -22,6 +23,9 @@ export class StudentEntity {
   @Column({ type: "int" })
   age: number;
 
-  @OneToMany(() => AddressEntity, (address) => address.student, {cascade: true})
-  addresses: AddressEntity[]; // Assuming AddressEntity is defined elsewhere
+  @OneToMany(() => AddressEntity, (address) => address.student, { cascade: true })
+  addresses: AddressEntity[]; 
+
+  @OneToOne(() => StudentAdditionalEntity, (additional) => additional.student, { cascade: true })
+  additionalInfo: StudentAdditionalEntity;
 }

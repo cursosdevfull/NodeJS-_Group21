@@ -10,10 +10,10 @@ AppDataSource.initialize()
     const studentRepository = AppDataSource.getRepository(StudentEntity);
     const address = AppDataSource.getRepository(AddressEntity)
 
-    const newAddress = new AddressEntity();
-    newAddress.street = "123 Main St";
-    newAddress.city = "Springfield";
-    newAddress.state = "IL";
+    const newAddress = new AddressEntity("123 Main St", "Springfield", "IL");
+    // newAddress.street = "123 Main St";
+    // newAddress.city = "Springfield";
+    // newAddress.state = "IL";
 
 /*     const savedAddress = await address.save(newAddress);
     console.log("Address has been saved: ", savedAddress); */

@@ -1,30 +1,34 @@
 import "reflect-metadata";
 import { AppDataSource } from "./data-source";
-import { RoleEntity } from "./entity/role.entity";
-import { UserEntity } from "./entity/user.entity";
+import { StudentEntity } from "./entity/student.entity";
 import { AddressEntity } from "./entity/address.entity";
-import { StudentEntity } from './entity/student.entity';
+import { StudentAdditionalEntity } from "./entity/student-additional.entity";
+import { Brackets } from "typeorm";
+
 
 AppDataSource.initialize()
-  .then(async ()=> {
-    const userRepository = AppDataSource.getRepository(UserEntity);
+  .then(async () => {
+    const manager = AppDataSource.manager;
 
-    const roles = [
-     {roleId: 1},
-     {roleId: 2}
-    ]
+    const students = await manager
+      .createQueryBuilder(StudentEntity, "student")
+      .select(["student.studentId", "student.firstName", "student.age"])
+      .where("student.studentId >= :id", { id: 2 })
+      .orWhere(
+        new Brackets((query) => {
+          query
+            .where("student.firstName = :firstName", { firstName: "Jane" })
+            .andWhere("student.age >= :age", { age: 25 });
+        })
+      )
+      .getRawMany();
 
-    const user = new UserEntity();
-    user.name = "John";
-    user.lastname = "Doe";
-    user.email = "john.doe@email.com";
-    user.age = 30;
-    user.roles = roles as RoleEntity[];
-
-
-   await userRepository.save(user);
-
+    console.log("Students:", students);
+    
   })
   .catch((err) => {
     console.error("Error during Data Source initialization:", err);
   });
+
+
+  

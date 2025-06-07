@@ -4,6 +4,9 @@ import { UserEntity } from './entity/user.entity';
 import { StudentEntity } from "./entity/student.entity";
 import { RoleEntity } from "./entity/role.entity";
 import { AddressEntity } from "./entity/address.entity";
+import { StudentAdditionalEntity } from './entity/student-additional.entity';
+import { CourseEntity } from "./entity/course.entity";
+import { AreaEntity } from "./entity/area.entity";
 
 export const AppDataSource = new DataSource({
     type: "mysql",
@@ -14,7 +17,7 @@ export const AppDataSource = new DataSource({
     database: "db",
     synchronize: true,
     logging: true,
-    entities: [UserEntity, StudentEntity, RoleEntity, AddressEntity],
+    entities: [UserEntity, StudentEntity, RoleEntity, AddressEntity, StudentAdditionalEntity, AreaEntity],
     migrations: [],
     subscribers: [],
 })
