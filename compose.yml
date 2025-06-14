@@ -9,3 +9,36 @@ services:
       MYSQL_PASSWORD: 12345
     ports:
       - "9000:3306"
+    volumes:
+      - vol-course-nodejs:/var/lib/mysql
+    networks:
+      - course-nodejs-network
+
+  redis-server:
+    image: redis:6.0.5-alpine
+    container_name: redis-server
+    command: redis-server --requirepass todovale
+    ports:
+      - "6380:6379"
+    networks:
+      - course-nodejs-network
+
+  redis-client:
+    image: rediscommander/redis-commander:latest
+    container_name: redis-client
+    ports:
+      - "8081:8081"
+    environment:
+      - REDIS_HOST=redis-server
+      - REDIS_PORT=6379
+      - REDIS_PASSWORD=todovale
+    networks:
+      - course-nodejs-network
+
+volumes:
+  vol-course-nodejs:
+    name: vol-course-nodejs
+
+networks:
+  course-nodejs-network:
+    name: course-nodejs-network

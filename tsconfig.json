@@ -5,16 +5,21 @@
         "rootDir": "./src",
         "module": "CommonJS",
         "esModuleInterop": true,
-        "moduleResolution": "node",
         "forceConsistentCasingInFileNames": true,
         "strict": true,
         "noImplicitAny": true,
         "baseUrl": ".",
         "skipLibCheck": true,
-        "sourceMap": true
+        "sourceMap": true,
+        "emitDecoratorMetadata": true,
+        "experimentalDecorators": true,
+        "declaration": true
     },
     "exclude": [
-        "**/*.spec.ts"
+        "**/*.spec.ts",
+        "node_modules",
+        "dist",
+        "init"
     ],
     "include": [
         "src/**/*.ts"

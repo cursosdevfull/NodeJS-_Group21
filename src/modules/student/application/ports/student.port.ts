@@ -1,10 +1,10 @@
 import { Student, StudentUpdateProps } from "../student";
+import { ResultPage } from '../../../../core/types/result-page';
 
 export type StudentPort = {
-    create(student: Student): Promise<Student>;
-    findByEmail(email: string): Promise<Student | undefined>;
-    findById(studentId: number): Promise<Student | undefined>;
+    save(student: Student): Promise<Student>;
+    //findByEmail(email: string): Promise<Student | undefined>;
+    findById(studentId: number): Promise<Student>;
     findAll(): Promise<Student[]>;
-    update(studentId: number, props: StudentUpdateProps): Promise<Student | null>;
-    delete(studentId: number): Promise<Student | null>;
+    getByPage(page: number, limit: number): Promise<ResultPage<Student>>;
 }

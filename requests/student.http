@@ -1,5 +1,84 @@
-###
-get http://localhost:4000/student
+### Path unknown
+get http://localhost:3000/unknown
 
-###
-get http://localhost:4000/student/add
+
+### Get all students
+get http://localhost:3000/student
+
+### Get by Student ID
+get http://localhost:3000/student/2
+
+### Get by page
+get http://localhost:3000/student/page?page=1&limit=3
+
+
+### Create a new student
+post http://localhost:3000/student
+Content-Type: application/json
+
+{
+  "name": "Pedro",
+  "lastname": "Guevara",
+  "age": 20,
+  "email": "pedro.guevara@email.com",
+  "phone": "1234567890",
+  "gender": "MALE",
+  "skills": [
+    "JavaScript",
+    "Python",
+    "React",
+    "Node.js"
+  ],
+  "education": [
+    {
+      "degree": "Bachelor of Science in Computer Science",
+      "institution": "University of Technology",
+      "yearOfGraduation": 2022
+    },
+    {
+      "degree": "Master of Science in Software Engineering",
+      "institution": "Institute of Advanced Studies",
+      "yearOfGraduation": 2024
+    }
+  ],
+  "experience": [
+    {
+      "company": "Tech Solutions Inc.",
+      "role": "Software Engineer",
+      "startDate": "2022-01-01",
+      "endDate": "2023-12-31"
+    },
+    {
+      "company": "Innovatech Ltd.",
+      "role": "Senior Developer",
+      "startDate": "2024-01-01",
+      "endDate": null
+    }
+  ],
+  "certifications": [
+    {
+      "name": "Certified JavaScript Developer",
+      "institution": "Tech Certification Board",
+      "date": "2023-05-15"
+    },
+    {
+      "name": "Python Programming Specialist",
+      "institution": "Global Tech Institute",
+      "date": "2024-02-20"
+    }
+  ]
+}
+
+### Create a new student
+put http://localhost:3000/student/2
+Content-Type: application/json
+
+{
+  "name": "Juan"
+}
+
+### Delete by Student ID
+delete http://localhost:3000/student/2
+
+### Delete cache
+get http://localhost:3000/invalidate-cache

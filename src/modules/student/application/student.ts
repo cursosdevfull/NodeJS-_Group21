@@ -54,12 +54,8 @@ export class Student {
         const age = new NumberVO("age", props.age, 18);
         this.age = age.value;
 
-        if (props.studentId) {
-            if (props.studentId < 1) {
-                throw new Error("Student ID must be a positive number");
-            }
-        } else {
-            this.studentId = Math.floor(Math.random() * 1000000);
+        if (props.studentId && props.studentId < 1) {
+            throw new Error("Student ID must be a positive number");
         }
 
         if (props.skills) {

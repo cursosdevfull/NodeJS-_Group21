@@ -4,7 +4,10 @@
   "description": "",
   "main": "index.js",
   "scripts": {
-    "start": "ts-node src/index.ts"
+    "dev": "nodemon src/index.ts",
+    "build": "npm run clean & tsc -p tsconfig.prod.json",
+    "clean": "rimraf dist",
+    "start": "cross-env NODE_ENV=production & node dist/index.js"
   },
   "repository": {
     "type": "git",
@@ -19,15 +22,22 @@
   },
   "homepage": "https://github.com/cursosdevfull/NodeJS-_Group21#readme",
   "dependencies": {
+    "class-transformer": "^0.5.1",
+    "class-validator": "^0.14.2",
+    "cross-env": "^7.0.3",
     "dotenv": "^16.5.0",
     "express": "^5.1.0",
+    "helmet": "^8.1.0",
+    "ioredis": "^5.6.1",
     "mysql2": "^3.14.1",
     "typeorm": "^0.3.24",
-    "zod": "^3.25.28"
+    "zod": "^3.25.56"
   },
   "devDependencies": {
     "@types/express": "^5.0.2",
     "@types/node": "^22.15.21",
+    "nodemon": "^3.1.10",
+    "rimraf": "^6.0.1",
     "ts-node": "^10.9.2"
   }
 }
