@@ -18,6 +18,9 @@ COPY . .
 RUN npm run build
 
 FROM base AS production
+ENV NODE_ENV=production
+USER node
+COPY package.json .
 COPY --from=build /app/dist ./dist
 COPY --from=deps /app/node_modules ./node_modules
 COPY .env ./.env
