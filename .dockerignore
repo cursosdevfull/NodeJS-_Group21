@@ -1,0 +1,8 @@
+dist
+node_modules
+requests
+compose.yml
+nodemon.json
+README.md
+Dockerfile
+compose.yml

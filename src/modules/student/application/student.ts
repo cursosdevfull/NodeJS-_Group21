@@ -45,10 +45,10 @@ export class Student {
     private deletedAt: Date | undefined;
 
     constructor(props: StudentProps) {
-        const name = new StringVO(props.name, "name", 3);
+        const name = new StringVO("name", props.name, 3);
         this.name = name.value;
 
-        const lastname = new StringVO(props.lastname, "lastname", 3);
+        const lastname = new StringVO("lastname", props.lastname, 3);
         this.lastname = lastname.value;
 
         const age = new NumberVO("age", props.age, 18);

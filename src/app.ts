@@ -2,8 +2,10 @@ import express, { Application } from 'express';
 import { studentRouter } from './modules/student/presentation';
 import helmet from 'helmet';
 import { TimingMiddleware } from './core/utils/timing.middleware';
-import Redis from 'ioredis';
 import { RedisBootstrap } from './bootstrap';
+import { userRouter } from './modules/user/presentation';
+import { roleRouter } from './modules/role/presentation';
+import { authRouter } from './modules/auth/presentation';
 
 class App {
     readonly app: Application = express();
@@ -28,7 +30,10 @@ class App {
     }
 
     private mountRoutes() {
+        this.app.use("/auth", authRouter)
         this.app.use("/student", studentRouter)
+        this.app.use("/user", userRouter)
+        this.app.use("/role", roleRouter)
     }
 
     private mountCache() {

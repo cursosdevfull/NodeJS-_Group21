@@ -1,0 +1,32 @@
+### Get all roles
+get http://localhost:3000/role
+authorization: Bearer eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJ1c2VySWQiOjE0LCJuYW1lIjoiSnVhbiIsImVtYWlsIjoianVhbi5jYXJsb3NAZW1haWwuY29tIiwicm9sZXMiOlsiQURNSU4iLCJTVVBFUkFETUlOIl0sImlhdCI6MTc1MDI5NjUyNiwiZXhwIjoxNzUwMzAwMTI2fQ.JhlJp_DjkZAVBomAj0sRdD37i1EjK1_EXNjuj1kLZKM
+
+
+### Get by Role ID
+get http://localhost:3000/role/2
+
+### Get by page
+get http://localhost:3000/role/page?page=1&limit=3
+
+
+### Create a new role
+post http://localhost:3000/role
+Content-Type: application/json
+
+{
+  "name": "Operator"
+}
+
+### Update a new role
+put http://localhost:3000/role/1
+Content-Type: application/json
+
+{
+  "name": "ADMIN"
+}
+
+### Delete by Role ID
+delete http://localhost:3000/role/2
+
+

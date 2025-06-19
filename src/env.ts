@@ -15,8 +15,10 @@ const envSchema = z.object({
     REDIS_PORT: z.coerce.number().default(6379),
     REDIS_PASS: z.string().default("12345"),
     REDIS_TTL_MINUTES: z.coerce.number().default(60),
+    JWT_SECRET: z.string().default("your-secret-key-change-in-production"),
+    JWT_EXPIRES_IN: z.string().default("1H"),
 })
 
 type Env = z.infer<typeof envSchema>;
 
-export const env: Env = envSchema.parse(process.env); 
+export const env: Env = envSchema.parse(process.env);

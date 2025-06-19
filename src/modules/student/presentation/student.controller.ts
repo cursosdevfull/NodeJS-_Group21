@@ -2,7 +2,7 @@ import { Student, StudentProps, StudentUpdateProps } from "../application/studen
 import { StudentApplication } from "../application/student.application";
 import { NextFunction, Request, Response } from 'express';
 import { StudentCreateDto, StudentIdDto, StudentPageDto } from "./dtos";
-import { Authentication, Authorization, Endpoint } from '../../../core/decorator';
+import { Endpoint } from '../../../core/decorator';
 import { StudentUpdateDto } from "./dtos/student-update.dto";
 import { RedisBootstrap } from '../../../bootstrap/redis.bootstrap';
 
@@ -15,7 +15,6 @@ export class StudentController {
 
     @Endpoint({
         schemaValidator: StudentCreateDto,
-        guards: [Authentication, Authorization.bind(Authorization, "ADMIN", "SUPPORT")]
     })
     async create(req: Request, res: Response, next: NextFunction) {
         const props: StudentProps = req.body
@@ -23,6 +22,9 @@ export class StudentController {
         const student = new Student(props)
         try {
             const result = await this.application.create(student)
+
+            await RedisBootstrap.clear("STUDENT");
+
             res.status(201).json(result);
         } catch (error: any) {
             return next(error)
@@ -31,7 +33,6 @@ export class StudentController {
 
     @Endpoint({
         schemaValidator: StudentUpdateDto,
-        guards: [Authentication, Authorization.bind(Authorization, "ADMIN", "SUPPORT")]
     })
     async update(req: Request, res: Response, next: NextFunction) {
         const studentId = req.params.studentId;
@@ -39,15 +40,15 @@ export class StudentController {
 
         try {
             const result = await this.application.update(Number(studentId), props);
+
+            await RedisBootstrap.clear("STUDENT");
+
             res.status(201).json(result);
         } catch (error) {
             next(error);
         }
     }
 
-    @Endpoint({
-        guards: [Authentication, Authorization.bind(Authorization, "ADMIN", "SUPPORT")]
-    })
     async findAll(req: Request, res: Response, next: NextFunction) {
         try {
             const students = await this.application.findAll()
@@ -62,7 +63,6 @@ export class StudentController {
 
     @Endpoint({
         schemaValidator: StudentIdDto,
-        guards: [Authentication, Authorization.bind(Authorization, "ADMIN", "SUPPORT")]
     })
     async findById(req: Request, res: Response, next: NextFunction) {
         const studentId = req.params.studentId;
@@ -80,13 +80,15 @@ export class StudentController {
 
     @Endpoint({
         schemaValidator: StudentIdDto,
-        guards: [Authentication, Authorization.bind(Authorization, "ADMIN", "SUPPORT")]
     })
     async delete(req: Request, res: Response, next: NextFunction) {
         const studentId = req.params.studentId;
 
         try {
             const student = await this.application.delete(Number(studentId));
+
+            await RedisBootstrap.clear("STUDENT");
+
             res.json(student);
         } catch (error) {
             next(error);
@@ -95,7 +97,6 @@ export class StudentController {
 
     @Endpoint({
         schemaValidator: StudentPageDto,
-        guards: [Authentication, Authorization.bind(Authorization, "ADMIN", "SUPPORT")]
     })
     async getByPage(req: Request, res: Response, next: NextFunction) {
         const page = req.query.page

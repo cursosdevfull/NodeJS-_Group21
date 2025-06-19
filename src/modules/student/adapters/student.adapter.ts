@@ -5,7 +5,7 @@ import { StudentDto } from "./dtos";
 import { DatabaseBootstrap } from '../../../bootstrap/database.bootstrap';
 import { IsNull } from "typeorm";
 import { DatabaseException, NotFoundException } from '../../../core/exceptions/handles';
-import { ResultPage } from "src/core/types";
+import { ResultPage } from '../../../core/types/result-page';
 
 export class StudentAdapter implements StudentPort {
     async save(student: Student): Promise<Student> {
